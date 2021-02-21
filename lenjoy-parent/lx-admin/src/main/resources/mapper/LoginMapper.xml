@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.LoginMapper">
+
+    <!--根据用户名获取对应的权限-->
+    <select id="getAuthorityByUsername" resultType="Map" parameterType="Map">
+        SELECT am.* FROM admin_users au INNER JOIN admin_user_authority aua
+        ON au.id=aua.userId INNER JOIN  admin_menus am ON am.id=
+        aua.menuId WHERE au.username=#{username} AND am.parentId=#{id}
+        <if test="isRoot==0">
+            AND am.flag='0'
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+#给当前应用配置服务名
+spring:
+  application:
+    name: lx-zuul
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+
+#配置zuul网关的转发路径
+zuul:
+  routes:
+    lx-admin: /system/**
+    lx-web: /front/**
+
+#指定Ribbon的读取失效时间,与连接时间
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+

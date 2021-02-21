@@ -1,0 +1,13 @@
+#配置端口号
+server:
+  port: 7073
+
+#配置数据库连接信息
+spring:
+  application:
+    name: lx-web-banner-consumer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

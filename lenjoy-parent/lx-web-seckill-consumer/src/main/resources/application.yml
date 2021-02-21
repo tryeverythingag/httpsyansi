@@ -1,0 +1,30 @@
+#配置端口号
+server:
+  port: 9093
+
+#配置数据库连接信息
+spring:
+  application:
+    name: lx-web-seckill-consumer
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 1
+  datasource:
+    url: jdbc:mysql://localhost:3306/lenjoy?useSSL=false
+    username: root
+    password: 123456
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

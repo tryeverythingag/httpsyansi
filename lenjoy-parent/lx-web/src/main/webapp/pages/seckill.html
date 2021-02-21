@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>秒杀页面</title>
+    <script type="text/javascript" src="/static/js/jquery-1.8.2.min.js"></script>
+</head>
+<body>
+    <img src="http://q3vt543cp.bkt.clouddn.com/fd2509768e8849da8b501f2ba61f7fa3.jpg" style="width: 150px;height: 150px">
+    <br>
+    <button id="seckill">立即抢购</button>
+    <script type="text/javascript">
+        $(function(){
+            $("#seckill").click(function(){
+                $.ajax({
+                    url:"http://localhost:9093/doSecKillByConsumer.do",
+                    type:"POST",
+                    dataType:"json",
+                    data:{
+                        "userId":1,
+                        "seckillId":1
+                    },
+                    success:function(rs){
+                        var status = rs.status;
+                        var orderNo = rs.orderNo;
+                        if(status=='0'){
+                            alert("成功抢购一个名额，快去结算吧");
+                            window.location.href="http://localhost:8085/pages/cache.jsp?orderNo="+orderNo;
+                        }else{
+                            alert(rs.msg);
+                        }
+                    }
+                });
+            })
+        });
+    </script>
+</body>
+</html>

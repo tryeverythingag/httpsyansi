@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.mapper.AuthorityMapper">
+    <resultMap id="OneMenu" type="com.java.pojo.admin.OneMenu">
+        <result property="oneId" javaType="Long" column="oneId"></result>
+        <result property="oneText" javaType="String" column="oneText"></result>
+        <collection property="twoMenuList" ofType="com.java.pojo.admin.TwoMenu">
+            <result property="twoId" javaType="Long" column="twoId"></result>
+            <result property="twoText" javaType="String" column="twoText"></result>
+            <result property="url" javaType="String" column="url"></result>
+        </collection>
+    </resultMap>
+    <select id="getAuthorityByRelation" resultMap="OneMenu">
+		SELECT t1.id AS oneId,t1.text AS oneText,t2.id AS twoId,t2.text AS twoText,t2.url
+        FROM (SELECT * FROM admin_menus WHERE parentId='0' AND flag='0') t1
+        INNER JOIN
+        (SELECT * FROM admin_menus WHERE parentId!='0' AND flag='0') t2
+        ON t1.id=t2.parentId
+	</select>
+</mapper>
